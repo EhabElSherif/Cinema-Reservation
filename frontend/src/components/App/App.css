@@ -1,0 +1,21 @@
+*{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  
+  --theme-color-1: #282c34;
+  --theme-color-2: #6197fb;
+  --theme-color-3: #505764;
+
+  transition: ease-in-out 0.2s;
+}
+
+body{
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.4;
+  background: rgb(228, 228, 228);
+}
+
+a{
+  text-decoration: none;
+}

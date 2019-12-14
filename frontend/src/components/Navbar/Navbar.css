@@ -1,0 +1,20 @@
+nav{
+    background: var(--theme-color-1);
+    border-bottom: 4px solid var(--theme-color-2);
+}
+
+.navbar-collapse a,
+.navbar-collapse a:hover{
+    color: var(--theme-color-2);
+}
+
+li:hover{
+    color: var(--theme-color-2);
+    background: var(--theme-color-3);
+}
+
+li.active a,
+li.active a:hover{
+    color: var(--theme-color-1);
+    background: var(--theme-color-2);
+}
