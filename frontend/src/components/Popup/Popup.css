@@ -8,9 +8,9 @@
     z-index: 999999;
 }
 
-.login-form{
+.popup-form{
     position: relative;
-    top: 50%;
+    top: -25%;
     transform: translateY(-50%);
     height: fit-content;
     background: white;

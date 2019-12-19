@@ -3,6 +3,11 @@ import './Navbar.css'
 
 
 class Navbar extends Component {
+
+	handleLoginOrRegister = (value) => {
+		this.props.loginOrRegister(value);            
+	}
+
 	render(){
 		return (
 			<nav className="navbar navbar-expand-lg pt-0 pb-0">
@@ -26,8 +31,11 @@ class Navbar extends Component {
 						</li>
 					</ul>
 					<ul className="navbar-nav ml-auto mr-4 mt-0 mb-0">
-						<li className="nav-item">
-							<a className="nav-link pt-3 pb-3">Login</a>
+						<li className="nav-item mx-1">
+							<button className="btn btn-outline-primary nav-link mx-auto login-btn" onClick={()=>this.handleLoginOrRegister("Login")}>Login</button>
+						</li>
+						<li className="nav-item mx-1">
+							<button className="btn btn-outline-success nav-link mx-auto signup-btn" onClick={()=>this.handleLoginOrRegister("Signup")}>Signup</button>
 						</li>
 					</ul>
 				</div>
