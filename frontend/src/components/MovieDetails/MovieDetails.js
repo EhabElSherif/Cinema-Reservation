@@ -7,7 +7,7 @@ class MovieDetails extends Component{
 		name: "Joker",
 		genre: ["Action","Drama"],
 		length: "150mins",
-		img: "img/1.jpg",
+		img: "/img/1.jpg",
 		screening: [
 			{
 				screenNumber: 1,
@@ -42,7 +42,7 @@ class MovieDetails extends Component{
 	}
     render(){
 		return (
-			<div className="row card-body">
+			<div className="row m-0  card-body px-5">
 				<div className="col-3 p-0 movie-poster">
 					<img src={this.state.img} alt={this.state.name} style={{width:"inherit",height:"inherit"}}></img>
 				</div>  
