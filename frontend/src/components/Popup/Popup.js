@@ -9,7 +9,7 @@ class Popup extends Component {
             <div className="row popup-window m-0">
                 <div className="col"></div>
                 <div className="col-4 popup-form">
-                    {this.props.type == 'Login' ? (
+                    {this.props.type === 'Login' ? (
                         
                         <LoginForm name = {this.props.type}></LoginForm>
                         

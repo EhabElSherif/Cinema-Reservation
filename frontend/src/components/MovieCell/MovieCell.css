@@ -1,0 +1,13 @@
+.movie-cell{
+    transform: scale(0.9);
+    height:20rem;
+    background-size:cover;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.329);
+    text-decoration: none;
+}
+.movie-cell:hover{
+    transform: scale(1);
+    text-decoration: none;
+    cursor: pointer;
+    /* box-shadow: inset 0px 0px 30px 10px rgba(0, 0, 0, 0.507); */
+}

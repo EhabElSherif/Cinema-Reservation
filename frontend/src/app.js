@@ -15,7 +15,7 @@ $(document).ready(()=>{
         $('.popup-window').css('display', 'none');
    });
 
-   $('.popup-form').click((e)=>{
-       e.stopPropagation();
-   });
+    $('.popup-form').click((e)=>{
+        e.stopPropagation();
+    });
 });

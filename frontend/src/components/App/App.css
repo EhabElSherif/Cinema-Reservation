@@ -6,7 +6,7 @@
   --theme-color-1: #282c34;
   --theme-color-2: #5781cf;
   --theme-color-3: #505764;
-
+  --theme-color-4: #4e82e4;
   transition: ease-in-out 0.2s;
 }
 
@@ -19,3 +19,17 @@ body{
 a{
   text-decoration: none;
 }
+
+/* form button.btn-primary{
+  background-color: var(--theme-color-3);
+  color: var(--theme-color-4);
+  border:none;
+}
+
+form button.btn-primary:hover,
+form button.btn-primary:active,
+form button.btn-primary:visited{
+  background-color: var(--theme-color-1);
+  color: var(--theme-color-2);
+  border:none;
+} */
