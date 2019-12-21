@@ -1,10 +1,11 @@
 import React,{Component} from 'react';
 import './MovieCell.css';
+import { Link } from 'react-router-dom';
 
 class MovieCell extends Component{
 	render(){
 		return (
-            <div className="col-3 text-center p-0 movie-cell">
+            <Link to={"/movie/"+this.props.movie.id} className="col-3 text-center p-0 movie-cell">
                 <img src={this.props.movie.img} style={{width:"inherit",height:"inherit"}} alt={this.props.movie.name}></img>
                 <div className="py-3" style={{position:"relative",color:"white",backgroundColor:"rgba(0,0,0,0.3)",transform:"translateY(-100%)"}}>
                     <h4>{this.props.movie.name}</h4>
@@ -15,7 +16,7 @@ class MovieCell extends Component{
                         }
                     </h5>
                 </div>
-            </div>
+            </Link>
         );
 	}
 }

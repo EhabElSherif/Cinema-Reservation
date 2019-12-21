@@ -1,0 +1,15 @@
+.tab-button{
+    opacity:0.5;
+    color:white;
+    background-color:var(--theme-color-1)
+}
+
+.tab-button:hover:not(.active){
+    opacity: 1;
+}
+
+.tab-button.active{
+    background: white;
+    color:black;
+    opacity:1;
+}
