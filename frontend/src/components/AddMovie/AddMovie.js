@@ -5,23 +5,44 @@ class AddMovie extends Component {
         genres:[
             {
                 id:1,
-                name:"Action"
-            },{
-                id:2,
-                name:"Drama"
-            },{
-                id:3,
                 name:"Comedy"
             },{
-                id:4,
+                id:2,
+                name:"Sci-Fi"
+            },{
+                id:3,
                 name:"Horror"
             },{
+                id:4,
+                name:"Romance"
+            },{
                 id:5,
-                name:"Thriller"
+                name:"Action"
             },{
                 id:6,
-                name:"Sci-Fi"
-            },
+                name:"Thriller"
+            },{
+                id:7,
+                name:"Drama"
+            },{
+                id:8,
+                name:"Mystery"
+            },{
+                id:9,
+                name:"Crime"
+            },{
+                id:10,
+                name:"Animation"
+            },{
+                id:11,
+                name:"Adventure"
+            },{
+                id:12,
+                name:"Fantasy"
+            },{
+                id:13,
+                name:"Superhero"
+            }
         ]
     }
     render() {
@@ -49,19 +70,6 @@ class AddMovie extends Component {
                         <button type="submit" className="btn btn-primary mb-3">Submit</button>
                     </div>
                 </form>
-                {/* <form className="mt-5">
-                    <div className="row m-0">
-                        <div className="col-8">
-                            <div className="row m-0">
-                                <div className="col-1"></div>
-                                <label className="col-3 m-0 align-self-center text-left">Movie Length:</label>
-                                <input className="col-6 my-2 input-group-text text-left" type="text" required name="length" placeholder="Length"></input>
-                                <div className="col"></div>
-                            </div>
-                        </div>
-                    </div>
-                    <button className="btn btn-primary button col-3 mt-1 mb-3 pb-2">Add Movie</button>
-                </form> */}
             </React.Fragment>
         )
     }

@@ -22,12 +22,6 @@ class Navbar extends Component {
 						<li className="nav-item active">
 							<Link className="nav-link pt-3 pb-3" to="/">Home</Link>
 						</li>
-						<li className="nav-item">
-							<Link className="nav-link pt-3 pb-3" to="/">Link</Link>
-						</li>
-						<li className="nav-item">
-							<Link className="nav-link pt-3 pb-3" to="/">adasasddsadasdasdsasd</Link>
-						</li>
 					</ul>
 					<ul className="navbar-nav ml-auto mr-4 mt-0 mb-0">
 						<li className="nav-item mx-1">

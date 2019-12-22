@@ -4,6 +4,7 @@ import MovieScreening from './../MovieScreening/MovieScreening';
 
 class MovieDetails extends Component{
 	state={
+		id:1,
 		name: "Joker",
 		genre: ["Action","Drama"],
 		length: "150mins",
@@ -57,7 +58,7 @@ class MovieDetails extends Component{
 					<p>
 						Length: {this.state.length}
 					</p>
-					<MovieScreening movieScreens={this.state.screening}></MovieScreening>
+					<MovieScreening movieID={this.state.id} movieScreens={this.state.screening}></MovieScreening>
 				</div>
 			</div>
         );
