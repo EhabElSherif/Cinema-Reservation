@@ -72,7 +72,7 @@ export default class CinemaHall extends Component {
         for (var i = 0; i < rows; i++) {
             for (let j = 0; j < columns; j++) {
                 chairs.push(
-                    <div className="col" style={{minWidth:"70px",height:"70px",transform:"scale(0.9)"}}>
+                    <div className="col" style={{minWidth:"70px",maxWidth:"70px",height:"70px",transform:"scale(0.9)"}}>
                         <Chair getOrder={this.getOrder} removeOrder={this.removeOrder} column={j+1} row={this.RowsNames[i+1]} isReserved={Math.random() >= 0.5}></Chair>  
                     </div>
                 );
@@ -89,7 +89,7 @@ export default class CinemaHall extends Component {
                         Screen
                         </h5>
                     </div>
-                    <div className="row" style={{maxHeight:"400px",minHeight:"400px",overflowY:"auto"}}>
+                    <div className="row m-0" style={{maxHeight:"400px",minHeight:"400px",overflowY:"auto"}}>
                         {this.placeChairs(this.state.rows,this.state.columns)}
                     </div>
                 </div>

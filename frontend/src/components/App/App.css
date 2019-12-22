@@ -21,6 +21,9 @@ a:hover{
   text-decoration: none;
 }
 
+svg *{
+  transition: none;
+}
 /* form button.btn-primary{
   background-color: var(--theme-color-3);
   color: var(--theme-color-4);
