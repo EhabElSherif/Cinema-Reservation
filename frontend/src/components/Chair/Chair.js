@@ -11,7 +11,7 @@ export class Chair extends Component {
     }
 
     addOrRemoveOrder = (position)=>{
-        var x;
+        let x;
         this.props.isReserved === true ? x=0 : this.state.willReserve === false ? this.props.getOrder(position) : this.props.removeOrder(position)
         this.setState({willReserve:!this.state.willReserve});
     }

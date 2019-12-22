@@ -33,6 +33,9 @@ export default class CinemaHall extends Component {
         26 :"Z"
     }
 
+    rows=10
+    columns=12
+
     state = {
         screen:{
             id:1,
@@ -45,8 +48,7 @@ export default class CinemaHall extends Component {
             length: "150mins",
             img: "/img/1.jpg",
         },
-        rows:10,
-        columns:12,
+        chairs: [],
         orders: []
     }
     
@@ -72,14 +74,19 @@ export default class CinemaHall extends Component {
         for (var i = 0; i < rows; i++) {
             for (let j = 0; j < columns; j++) {
                 chairs.push(
-                    <div className="col" style={{minWidth:"70px",maxWidth:"70px",height:"70px",transform:"scale(0.9)"}}>
+                    <div className="col" style={{minWidth:"70px",maxWidth:"70px",height:"70px",transform:"scale(0.9)"}} key={this.RowsNames[i+1]+String(j+1)}>
                         <Chair getOrder={this.getOrder} removeOrder={this.removeOrder} column={j+1} row={this.RowsNames[i+1]} isReserved={Math.random() >= 0.5}></Chair>  
                     </div>
                 );
             }
         }
-        return <React.Fragment>{chairs}</React.Fragment>;
+        this.setState({chairs})
     }
+    
+    componentDidMount(){
+        this.placeChairs(this.rows,this.columns)
+    }
+    
     render() {
         return (
             <div className="d-flex">
@@ -90,7 +97,7 @@ export default class CinemaHall extends Component {
                         </h5>
                     </div>
                     <div className="row m-0" style={{maxHeight:"400px",minHeight:"400px",overflowY:"auto"}}>
-                        {this.placeChairs(this.state.rows,this.state.columns)}
+                        {this.state.chairs}
                     </div>
                 </div>
                 <div className="col-4 text-center">
