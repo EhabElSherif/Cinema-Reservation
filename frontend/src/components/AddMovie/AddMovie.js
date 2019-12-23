@@ -45,6 +45,7 @@ class AddMovie extends Component {
             }
         ]
     }
+
     render() {
         return (
             <React.Fragment>
@@ -55,16 +56,17 @@ class AddMovie extends Component {
                         <input className="col-6 input-group-text text-left" type="text" required name="name" placeholder="Movie Name"></input>
                     </div>
                     <div className="form-group d-flex justify-content-center">
-                        <label className="col-4 m-0 align-self-center text-left">Genre:</label>
-                        <select className="col-6 form-control" id="formControlSelectGenre">
-                            {this.state.genres.map((genre)=>(
-                                <option>{genre.name}</option>
-                            ))}
-                        </select>
+                    <label className="col-4 m-0 align-self-center text-left">Genre:</label>
+
+                    <select id="formControlSelectGenre" className="col-6 form-control selectGenere selectpicker" multiple>
+                        {this.state.genres.map((genre)=>(
+                            <option selected>{genre.name}</option>
+                        ))}
+                    </select>
                     </div>
                     <div className="form-group d-flex justify-content-center">
                         <label className="col-4 m-0 align-self-center text-left">Length<small>(in minutes)</small>:</label>
-                        <input className="col-6 input-group-text text-left" type="number" required name="number" placeholder="Length" defaultValue="120"></input>
+                        <input className="col-6 input-group-text text-left" type="number" required name="length" placeholder="Length" defaultValue="120"></input>
                     </div>
                     <div className="mt-4">
                         <button type="submit" className="btn btn-primary mb-3">Submit</button>

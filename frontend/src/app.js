@@ -1,5 +1,9 @@
 import $ from 'jquery';
+import 'bootstrap-select/dist/css/bootstrap-select.min.css';
+import 'bootstrap-select';
+
 $(document).ready(()=>{
+    $('.selectpicker').selectpicker();
     $('.login-btn').click(()=>{
         $('.popup-window').css('display','flex');
         $('.popup-form').css({top:'50%'});
