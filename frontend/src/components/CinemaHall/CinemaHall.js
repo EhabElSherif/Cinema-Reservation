@@ -72,17 +72,26 @@ export default class CinemaHall extends Component {
     placeChairs = (rows,columns)=>{
         var chairs = [];
         for (var i = 0; i < rows; i++) {
-            for (let j = 0; j < columns; j++) {
-                chairs.push(
-                    <div className="col" style={{minWidth:"70px",maxWidth:"70px",height:"70px",transform:"scale(0.9)"}} key={this.RowsNames[i+1]+String(j+1)}>
-                        <Chair getOrder={this.getOrder} removeOrder={this.removeOrder} column={j+1} row={this.RowsNames[i+1]} isReserved={Math.random() >= 0.5}></Chair>  
-                    </div>
-                );
-            }
+            chairs.push(
+                <div className="row m-0 justify-content-center">
+                {this.setRow(i,columns)}
+                </div>
+            );
         }
         this.setState({chairs})
     }
     
+    setRow = (row,columns)=>{
+        var chairs = []
+        for (let j = 0; j < columns; j++) {
+            chairs.push(
+                <div className="col-1 p-0" style={{minWidth:"70px",maxWidth:"70px",height:"70px",transform:"scale(0.9)"}} key={this.RowsNames[row+1]+String(j+1)}>
+                    <Chair getOrder={this.getOrder} removeOrder={this.removeOrder} column={j+1} row={this.RowsNames[row+1]} isReserved={Math.random() >= 0.5}></Chair>  
+                </div>
+            );
+        }
+        return chairs;
+    }
     componentDidMount(){
         this.placeChairs(this.rows,this.columns)
     }
@@ -96,7 +105,7 @@ export default class CinemaHall extends Component {
                         Screen
                         </h5>
                     </div>
-                    <div className="row m-0" style={{maxHeight:"400px",minHeight:"400px",overflowY:"auto"}}>
+                    <div className="justify-content-center" style={{maxHeight:"400px",minHeight:"400px",overflowY:"auto",width:"100%"}}>
                         {this.state.chairs}
                     </div>
                 </div>
