@@ -1,72 +1,76 @@
 import React, { Component } from 'react'
+import axios from 'axios';
 
 class AddMovie extends Component {
-    state = {
-        genres:[
-            {
-                id:1,
-                name:"Comedy"
-            },{
-                id:2,
-                name:"Sci-Fi"
-            },{
-                id:3,
-                name:"Horror"
-            },{
-                id:4,
-                name:"Romance"
-            },{
-                id:5,
-                name:"Action"
-            },{
-                id:6,
-                name:"Thriller"
-            },{
-                id:7,
-                name:"Drama"
-            },{
-                id:8,
-                name:"Mystery"
-            },{
-                id:9,
-                name:"Crime"
-            },{
-                id:10,
-                name:"Animation"
-            },{
-                id:11,
-                name:"Adventure"
-            },{
-                id:12,
-                name:"Fantasy"
-            },{
-                id:13,
-                name:"Superhero"
-            }
-        ]
+    constructor(props){
+        super(props)    
+        this.state = {
+            name:"",
+            length:"",
+            genres:[],
+            img:""
+        }
+        this.submitForm = this.submitForm.bind(this)
+    }
+
+    submitForm = (event)=>{
+        event.preventDefault()
+        let data ={
+            name:this.state.name,
+            length:this.state.length,
+            img:this.state.img,
+            genres:this.state.genres
+        }
+        let genresIDx = this.state.genres.reduce((out, bool, index) =>
+                bool ? out.concat(index+1) : out, []
+        )
+        data.genres=genresIDx;
+
+        axios.post('/api/movies',data).then((response)=>{
+            alert(response.statusText)
+        })
+    }
+
+    handleGenre = (event,idx)=>{
+        let genres = this.state.genres
+        genres[idx] = event.target.checked
+        this.setState({genres:genres})
     }
 
     render() {
+        if (!this.props.genres) return null
         return (
             <React.Fragment>
                 <h4 className="m-0 pt-4 text-center">Add Movie</h4>
-                <form className="mt-5 text-center">
+                <form className="mt-5 text-center" onSubmit={this.submitForm}>
                     <div className="form-group d-flex justify-content-center">
                         <label className="col-4 m-0 align-self-center text-left">Movie Name:</label>
-                        <input className="col-6 input-group-text text-left" type="text" required name="name" placeholder="Movie Name"></input>
+                        <input className="col-6 input-group-text text-left" type="text" required name="name" placeholder="Movie Name" value={this.state.name} onChange={(event)=>this.setState({name:event.target.value})}></input>
                     </div>
                     <div className="form-group d-flex justify-content-center">
                     <label className="col-4 m-0 align-self-center text-left">Genre:</label>
-
-                    <select id="formControlSelectGenre" className="col-6 form-control selectGenere selectpicker" multiple>
-                        {this.state.genres.map((genre)=>(
-                            <option selected>{genre.name}</option>
+                    {/* <select id="formControlSelectGenre" className="col-6 selectGenere selectpicker form-control" style={{display:"block"}}>
+                    {this.props.genres.map((genre)=>(
+                            <option>{genre.name}</option>
                         ))}
-                    </select>
+                    </select> */}
+                    <div className="col-6 row">
+                        {
+                        this.props.genres.map((genre,idx)=>(
+                            <div className="col-6 p-0 text-left">
+                                <input type="checkbox" value={this.state.genres[idx+1]} onChange={(event)=>this.handleGenre(event,idx)}></input>
+                                <label>{genre.name}</label>
+                            </div>
+                        ))}
+                        </div>
                     </div>
                     <div className="form-group d-flex justify-content-center">
                         <label className="col-4 m-0 align-self-center text-left">Length<small>(in minutes)</small>:</label>
-                        <input className="col-6 input-group-text text-left" type="number" required name="length" placeholder="Length" defaultValue="120"></input>
+                        <input className="col-6 input-group-text text-left" type="number" required name="length" placeholder="Length" defaultValue="120"  value={this.state.length} onChange={(event)=>this.setState({length:event.target.value})}></input>
+                    </div>
+                    <div className="form-group d-flex justify-content-center">
+                        <label className="col-4 m-0 align-self-center text-left">Movie Poster Directory:</label>
+                        <input className="col-6 input-group-text text-left" type="text" required name="poster" placeholder="Movie Poster"  value={this.state.img} onChange={(event)=>this.setState({img:event.target.value})}></input>
                     </div>
                     <div className="mt-4">
                         <button type="submit" className="btn btn-primary mb-3">Submit</button>

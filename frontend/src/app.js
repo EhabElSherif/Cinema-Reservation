@@ -1,6 +1,6 @@
 import $ from 'jquery';
 import 'bootstrap-select/dist/css/bootstrap-select.min.css';
-import 'bootstrap-select';
+import 'bootstrap-select/dist/js/bootstrap-select.min.js';
 
 $(document).ready(()=>{
     $('.selectpicker').selectpicker();

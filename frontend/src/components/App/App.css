@@ -20,7 +20,9 @@ a,
 a:hover{
   text-decoration: none;
 }
-
+.form-control{
+  background-color: #e2e6ea;
+}
 svg *{
   transition: none;
 }

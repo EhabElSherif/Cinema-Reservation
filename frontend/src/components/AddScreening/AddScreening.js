@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 
 class AddScreening extends Component {
     months ={
@@ -15,70 +16,62 @@ class AddScreening extends Component {
         "Nov":"11",
         "Dec":"12"
     }
-
-    state={
-        screens:[1,2,3,4,5,6],
-        movies:[{
-            name: "Joker",
-            genre: ["Drama"],
-            screen: 1,
-            img: "img/1.jpg"
-        },{
-            name: "Men In Black",
-            genre: ["Action"],
-            screen : 2,
-            img: "img/3.jpg"
-        },{
-            name: "صعيدي في الجامعة الأميريكية",
-            genre: ["Comedy"],
-            screen : 2,
-            img: "img/6.jpg"
-        },{
-            name: "Alaadin",
-            genre: ["Sci-Fi","Romance"],
-            screen : 3,
-            img: "img/4.jpg"
-        },{
-            name: "La La Land",
-            genre: ["Romance"],
-            screen : 1,
-            img: "img/6.jpg"
-        },{
-            name: "La La Land",
-            genre: ["Romance"],
-            screen : 1,
-            img: "img/6.jpg"
-        }],
-        currentTime:Date().split(' ')
+    currentTime = Date().split(' ')
+    
+    constructor(props){
+        super(props)
+        this.state={
+            screenID:1,
+            movieID:1,
+            screenDate:this.currentTime[3]+"-"+this.months[this.currentTime[1]]+"-"+this.currentTime[2],
+            screenTime:this.currentTime[4]
+        }
+        this.submitForm = this.submitForm.bind(this)
     }
+    
+    submitForm = (event)=>{
+        event.preventDefault()
+        let data ={
+            screenID:this.state.screenID,
+            movieID:this.state.movieID,
+            screenDate:this.state.screenDate,
+            screenTime:this.state.screenTime
+        }
+
+        axios.post('/api/movies/'+this.state.movieID+'/screening',data).then((response)=>{
+            alert(response.statusText)
+        })
+    }
+
     render() {
+        if (!this.props.screens) return null;
         return (
             <React.Fragment>
                 <h4 className="m-0 pt-4 text-center">Add Screening</h4>
-                <form className="mt-5 text-center">
+                <form className="mt-5 text-center" onSubmit={this.submitForm}>
                     <div className="form-group d-flex justify-content-center">
                         <label className="col-4 m-0 align-self-center text-left">Screen Number:</label>
-                        <select className="col-6 form-control" id="formControlSelectScreen">
-                            {this.state.screens.map((screenNumber)=>(
-                                <option>{screenNumber}</option>
+                        <select className="col-6 form-control" id="formControlSelectScreen" value={this.state.screenID} onChange={(event)=>this.setState({screenID:event.target.value})}>
+                            {this.props.screens.map((screen)=>(
+                                <option value={screen.id}>{screen.id}</option>
                             ))}
                         </select>
                     </div>
                     <div className="form-group d-flex justify-content-center">
                         <label className="col-4 m-0 align-self-center text-left">Movie:</label>
-                        <select className="col-6 form-control" id="formControlSelectMovie">
-                            {this.state.movies.map((movie)=>(
-                                <option>{movie.name}</option>
+                        <select className="col-6 form-control" id="formControlSelectMovie" value={this.state.movieID} onChange={(event)=>this.setState({movieID:event.target.value})}>
+                            {this.props.movies.map((movie)=>(
+                                <option value={movie.id}>{movie.name}</option>
                             ))}
                         </select>
                     </div>
                     <div className="form-group d-flex justify-content-center">
                         <label className="col-4 m-0 align-self-center text-left">Date:</label>
-                        <input className="col-6 form-control" id="screenDate" type="date" required name="screenDate" defaultValue={this.state.currentTime[3]+"-"+this.months[this.state.currentTime[1]]+"-"+this.state.currentTime[2]}></input>
+                        <input className="col-6 form-control" id="screenDate" type="date" required name="screenDate" value={this.state.screenDate} onChange={(event)=>this.setState({screenDate:event.target.value})}></input>
                     </div>
                     <div className="form-group d-flex justify-content-center">
                         <label className="col-4 m-0 align-self-center text-left">Time:</label>
-                        <input className="col-6 form-control" id="screenTime" type="time" required name="screenTime" defaultValue={this.state.currentTime[4]}></input>
+                        <input className="col-6 form-control" id="screenTime" type="time" required name="screenTime" value={this.state.screenTime} onChange={(event)=>this.setState({screenTime:event.target.value})}></input>
                     </div>
                     <div className="mt-4">
                         <button type="submit" className="btn btn-primary mb-3">Submit</button>

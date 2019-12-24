@@ -1,0 +1,3 @@
+.bootstrap-select>select.bs-select-hidden, select.bs-select-hidden, select.selectpicker{
+    display: block;
+}
