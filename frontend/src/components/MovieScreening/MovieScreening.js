@@ -25,7 +25,7 @@ class MovieScreening extends Component{
                                 <div className="d-flex my-3">
                                     <div className="col-5 py-2">{value['date']}</div>
                                     <div className="col-5 py-2">{value['time']}</div>
-                                    <Link to={"/movie/"+this.props.movieID+"/reservation/"+value['screen_id']} className="col-2 btn btn-success">Reserve</Link>
+                                    <Link to={"/reservation/"+value['id']} className="col-2 btn btn-success">Reserve</Link>
                                 </div>
                             </div>
                         </div>

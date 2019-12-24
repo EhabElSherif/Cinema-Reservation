@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Chair from '../Chair/Chair'
 import Ticket from '../Ticket/Ticket'
-
+import axios from 'axios'
 
 export default class CinemaHall extends Component {
     RowsNames ={
@@ -36,21 +36,31 @@ export default class CinemaHall extends Component {
     rows=10
     columns=12
 
-    state = {
-        screen:{
-            id:1,
-            date: "12-12-2019",
-            time: "21:00PM"
-        },
-        movie:{
-            name: "Joker",
-            genre: ["Action","Drama"],
-            length: "150mins",
-            img: "/img/1.jpg",
-        },
-        chairs: [],
-        orders: []
+    constructor(){
+        super()
+        this.state = {
+            screening:{
+                id:null,
+                date: "",
+                time: ""
+            },
+            movie:{
+                name: "",
+                genre: [],
+                length: null,
+                img: "",
+            },
+            reservedChairs:null,
+            chairs: [],
+            orders: []
+        }
+        this.getMovie = this.getMovie.bind(this);
+        this.getOrder = this.getOrder.bind(this);
+        this.removeOrder = this.removeOrder.bind(this);
+        this.placeChairs = this.placeChairs.bind(this);
+        this.setRow = this.setRow.bind(this);
     }
+    
     
     getOrder = (chair)=>{
         var orders = this.state.orders
@@ -68,7 +78,7 @@ export default class CinemaHall extends Component {
             }
         })
     }
-
+    
     placeChairs = (rows,columns)=>{
         var chairs = [];
         for (var i = 0; i < rows; i++) {
@@ -84,19 +94,50 @@ export default class CinemaHall extends Component {
     setRow = (row,columns)=>{
         var chairs = []
         for (let j = 0; j < columns; j++) {
+            let isReserved = false;
+            if (this.state.reservedChairs.find(element=>{return element.position == this.RowsNames[row+1]+(j+1)}))
+                isReserved = true;
+            else
+                isReserved = false;
             chairs.push(
                 <div className="col-1 p-0" style={{minWidth:"70px",maxWidth:"70px",height:"70px",transform:"scale(0.9)"}} key={this.RowsNames[row+1]+String(j+1)}>
-                    <Chair getOrder={this.getOrder} removeOrder={this.removeOrder} column={j+1} row={this.RowsNames[row+1]} isReserved={Math.random() >= 0.5}></Chair>  
+                    <Chair getOrder={this.getOrder} removeOrder={this.removeOrder} column={j+1} row={this.RowsNames[row+1]} isReserved={isReserved}></Chair>  
                 </div>
             );
         }
         return chairs;
     }
-    componentDidMount(){
-        this.placeChairs(this.rows,this.columns)
+    
+    getMovie = ()=>{
+        axios.get('/api/reservation/'+this.props.match.params.screening_id).then(response=>{
+            this.setState({
+                reservedChairs:response.data.tickets,
+                screening:response.data.screening,
+                movie:response.data.movie
+            });
+            this.placeChairs(this.rows,this.columns)
+        });
+
     }
     
+    getOrdersAfterSubmit = (orders)=>{
+        let newPositions = []
+        orders.map(order=>{
+            newPositions.push({"position":order['row']+order['column']})
+        });
+        this.setState({reservedChairs:this.state.reservedChairs.concat(newPositions)})
+    }
+
+    componentDidMount(){
+        this.getMovie()
+    }
+    
+    componentWillUpdate(){
+        this.getMovie()
+    }
+
     render() {
+        if(!this.state.reservedChairs) return null;
         return (
             <div className="d-flex">
                 <div className="row col-8 m-0">
@@ -110,7 +151,7 @@ export default class CinemaHall extends Component {
                     </div>
                 </div>
                 <div className="col-4 text-center">
-                    <Ticket movie={this.state.movie} screen={this.state.screen} orders={this.state.orders}></Ticket>
+                    <Ticket movie={this.state.movie} screening={this.state.screening} orders={this.state.orders} getOrdersAfterSubmit={this.getOrdersAfterSubmit}></Ticket>
                 </div>
             </div>
         )

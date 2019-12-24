@@ -19,7 +19,7 @@ class Movie extends Model
     }
 
     public function screens(){
-        return $this->belongsToMany('App\Screen','movies_screens','movie_id','screen_id')->withPivot('date','time');
+        return $this->belongsToMany('App\Screen','movies_screens','movie_id','screen_id')->withPivot('id','date','time');
     }
 
     // public function headOf() {//One to One relationship

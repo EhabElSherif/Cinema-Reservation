@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Movie extends Controller
 {
@@ -75,6 +76,18 @@ class Movie extends Controller
             'screens'=>$movie_screens
         ];
         return $movie;
+    }
+
+    public function get_reservations($screening_id){
+        try {
+            $tickets = DB::table('tickets')->select('position')->where('movie_screen_id',$screening_id)->get();
+            $screening = DB::table('movies_screens')->where('id',$screening_id)->first();
+            $movie = \App\Movie::find($screening->movie_id);
+        } catch (\Throwable $th) {
+            error_log($th);
+        }
+        $res = ['tickets'=>$tickets,'movie'=>$movie,'screening'=>$screening];
+        return $res;
     }
 
     /**

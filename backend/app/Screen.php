@@ -14,6 +14,6 @@ class Screen extends Model
     public $timestamps = false;
 
     public function movies(){
-        return $this->belongsToMany('App\Movie','movies_screens','screen_id','movie_id')->withPivot('date','time');;
+        return $this->belongsToMany('App\Movie','movies_screens','screen_id','movie_id')->withPivot('id','date','time');;
     }
 }

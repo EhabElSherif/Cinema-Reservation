@@ -39,7 +39,7 @@ class AddScreening extends Component {
         }
 
         axios.post('/api/movies/'+this.state.movieID+'/screening',data).then((response)=>{
-            alert(response.statusText)
+            alert(response.status)
         })
     }
 

@@ -25,7 +25,7 @@ class App extends Component{
 					<div className="mt-5">
 						<Route exact path="/" component={AllMovies}></Route>
 						<Route exact path="/movie/:id" component={MovieDetails}></Route>
-						<Route exact path="/movie/:id/reservation/:id" component={CinemaHall}></Route>
+						<Route exact path="/reservation/:screening_id" component={CinemaHall}></Route>
 						<Route exact path="/admin" component={AdminPanel}></Route>
 					</div>
 					<Popup type={this.state.loginOrReg}></Popup>

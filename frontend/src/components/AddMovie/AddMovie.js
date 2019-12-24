@@ -27,7 +27,7 @@ class AddMovie extends Component {
         data.genres=genresIDx;
 
         axios.post('/api/movies',data).then((response)=>{
-            alert(response.statusText)
+            alert(response.status)
         })
     }
 

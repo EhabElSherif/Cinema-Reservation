@@ -23,7 +23,7 @@ class MovieDetails extends Component{
 			let genres = response.data.genres;
 			let screens = response.data.screens;
 			let screening = []
-			response.data.screens.map((screen)=>{
+			screens.map((screen)=>{
 				screening.push(screen.pivot)
 			})
 			movie = {
@@ -34,6 +34,8 @@ class MovieDetails extends Component{
 				genres:genres,
 				screens:screening
 			}
+			console.log(screens)
+			console.log(movie)
 			this.setState({movie:movie})
 		});
 	}

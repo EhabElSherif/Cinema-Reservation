@@ -20,4 +20,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::resource('/movies','Movie');
 Route::resource('/genres','Genre');
 Route::resource('/screens','Screen');
-Route::post('/movies/{id}/screening','Movie@Screening');
+Route::post('/movies/{id}/screening','Movie@screening');
+Route::get('/reservation/{screening_id}','Movie@get_reservations');
+Route::post('/reserve','Ticket@store');

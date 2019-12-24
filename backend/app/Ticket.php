@@ -16,4 +16,8 @@ class Ticket extends Model
     public function customer(){
         return $this->belongsTo('App\Customer');
     }
+
+    public function screening(){
+        return $this->belongsTo('App\Screening');
+    }
 }

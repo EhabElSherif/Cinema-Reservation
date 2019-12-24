@@ -34,7 +34,13 @@ class Ticket extends Controller
      */
     public function store(Request $request)
     {
-        //
+        foreach ($request['position'] as $position){
+            $data = new \App\Ticket;
+            $data->customer_id = $request['customerID'];
+            $data->movie_screen_id = $request['screeningID'];
+            $data->position = $position;
+            $data->save();
+        }
     }
 
     /**
